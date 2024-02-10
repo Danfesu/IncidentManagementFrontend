@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.field{
+  margin: 0px 10px;
+}
+
+.field-form-50 {
+  width: 920px;
+}
+
+.field-form-25 {
+  width: 450px;
+}
+
+.field-form-33 {
+  width: 600px;
+}
+
+.field-form-16 {
+  width: 300px;
+}

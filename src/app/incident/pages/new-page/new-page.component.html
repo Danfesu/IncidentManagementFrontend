@@ -1,0 +1,64 @@
+<div style="margin: 30px;">
+    <h1 style="margin: 20px 0px 0px 40px;">Agregar incidente al historial</h1>
+    <hr>
+    <div class="container">
+        <form [formGroup]="myForm" (ngSubmit)="onSave()">
+            <mat-form-field class="field-form-50">
+                <mat-label>Numero incidente</mat-label>
+                <input matInput type="number" formControlName="id">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-form-16 field">
+                <mat-label>Proceso de error</mat-label>
+                <mat-select formControlName="applicationId" (selectionChange)="getClusteredError(myForm.get('applicationId')?.value)">
+                    <mat-option *ngFor="let app of applications" [value]="app.id">{{app.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="field-form-33 field">
+                <mat-label>Error agrupado</mat-label>
+                <mat-select formControlName="clusteredErrorId" >
+                    <mat-option *ngFor="let error of clusteredErrors" [value]="error.id">{{error.description}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-form-25 field">
+                <mat-label>Causa del error</mat-label>
+                <mat-select formControlName="causeErrorId" >
+                    <mat-option *ngFor="let cause of causeErrors" [value]="cause.id">{{cause.description}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="field-form-25 field">
+                <mat-label>Accion Ejecutada</mat-label>
+                <mat-select formControlName="actionExecutedId" >
+                    <mat-option *ngFor="let action of actionExecuteds" [value]="action.id">{{action.description}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-form-25 field">
+                <mat-label>HU Raizal / Mejora</mat-label>
+                <input matInput type="text" formControlName="huRaizal">
+            </mat-form-field>
+            <mat-form-field class="field-form-25 field">
+                <mat-label>Estado de raizal</mat-label>
+                <mat-select formControlName="stateRaizalId" >
+                    <mat-option *ngFor="let state of stateRaizals" [value]="state.id">{{state.type}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-form-16 field">
+                <mat-label>Responsable Solucion</mat-label>
+                <mat-select formControlName="solutionManagerId" (selectionChange)="getAnalysts(myForm.get('solutionManagerId')?.value)">
+                    <mat-option *ngFor="let manager of solutionManagers" [value]="manager.id">{{manager.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="field-form-33 field">
+                <mat-label>Analista</mat-label>
+                <mat-select formControlName="analyst" >
+                    <mat-option *ngFor="let analyst of analysts" [value]="analyst.id">{{analyst.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
+
+
