@@ -38,6 +38,11 @@
                     <td mat-cell *matCellDef="let element">{{element.solution}}</td>
                 </ng-container>
 
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                    <td mat-cell *matCellDef="let element">{{element.date}}</td>
+                </ng-container>
+
                 <ng-container matColumnDef="analista">
                     <th mat-header-cell *matHeaderCellDef> Analista </th>
                     <td mat-cell *matCellDef="let element">{{element.analyst.name}}</td>

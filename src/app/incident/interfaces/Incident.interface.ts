@@ -14,6 +14,7 @@ export interface Incident {
     confirmed_operability: boolean;
     access_oc:             string;
     application:           string;
+    hu_raizal:             string;
     clusteredError:        ClusteredError;
     causeError:            CauseError;
     actionExecuted:        ActionExecuted;

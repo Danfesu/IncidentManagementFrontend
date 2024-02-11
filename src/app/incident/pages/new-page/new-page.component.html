@@ -2,7 +2,7 @@
     <h1 style="margin: 20px 0px 0px 40px;">Agregar incidente al historial</h1>
     <hr>
     <div class="container">
-        <form [formGroup]="myForm" (ngSubmit)="onSave()">
+        <form [formGroup]="myForm" (ngSubmit)="onSave()" autocomplete="off">
             <mat-form-field class="field-form-50">
                 <mat-label>Numero incidente</mat-label>
                 <input matInput type="number" formControlName="id">
@@ -19,6 +19,11 @@
                 <mat-select formControlName="clusteredErrorId" >
                     <mat-option *ngFor="let error of clusteredErrors" [value]="error.id">{{error.description}}</mat-option>
                 </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field *ngIf="myForm.get('clusteredErrorId')?.value === 0" class="field-form-50 field">
+                <mat-label>Nuevo error agrupado</mat-label>
+                <input matInput type="text" formControlName="newClusteredError">
             </mat-form-field>
             <br>
             <mat-form-field class="field-form-25 field">
@@ -57,7 +62,37 @@
                     <mat-option *ngFor="let analyst of analysts" [value]="analyst.id">{{analyst.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
+            <br>
+            <mat-form-field class="field-form-50 field">
+                <mat-label>Diagnostico</mat-label>
+                <input matInput type="text" formControlName="diagnosis">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-form-50 field">
+                <mat-label>Solucion</mat-label>
+                <input matInput type="text" formControlName="solution">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-form-25 field">
+                <mat-label>Confirmar operatividad</mat-label>
+                <mat-select formControlName="confirmedOperability" >
+                    <mat-option *ngFor="let option of optionConfirmedOperability" [value]="option.value">{{option.option}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="field-form-25 field">
+                <mat-label>OC Acceso a PDN - (PAM)</mat-label>
+                <input matInput type="text" formControlName="accessOc">
+            </mat-form-field>
+            <br>
+            <!-- Boton submit -->
+            
+            <button mat-raised-button
+                    color="primary"
+                    type="submit">
+                Guardar
+            </button>
         </form>
+        
     </div>
 </div>
 

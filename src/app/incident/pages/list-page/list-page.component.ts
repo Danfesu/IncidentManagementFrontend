@@ -34,7 +34,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 export class ListPageComponent implements OnInit, AfterViewInit{
   
   columnasTabla: string[] = [
-    "codigo", "aplicacion", "diagnostico", "solucion", "analista", "acciones"
+    "codigo", "aplicacion", "diagnostico", "solucion", "fecha", "analista", "acciones"
   ]
 
   dataListaIncidentes!: MatTableDataSource<Incident>;
@@ -93,17 +93,7 @@ export class ListPageComponent implements OnInit, AfterViewInit{
   }
 
   copyToClipboard(id: number): void {
-    this.incidentService.getSolutionTemplate(id).subscribe( solutionTemplate => {
-      navigator.clipboard.writeText(solutionTemplate)
-      .then(()=>{
-        this.utilidadService.mostrarAlerta("La plantilla de solucion se ha copiado en el portapapeles","Exito!");
-      })
-      .catch(err => {
-        this.utilidadService.mostrarAlerta( err ,"Error :(");
-        throw err;
-      });
-    });
-    
+    this.utilidadService.copyToClipboard(id);
   }
 
 

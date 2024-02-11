@@ -7,7 +7,7 @@ export interface Application {
 }
 
 export interface ClusteredError {
-    id:             number;
+    id:             number | null;
     description:    string;
     application_id: number;
 }

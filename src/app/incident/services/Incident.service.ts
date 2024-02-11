@@ -21,14 +21,22 @@ export class IncidentService {
       );
   }
 
+  saveIncident(incident:Incident):Observable<Incident>{
+    return this.httpClient.post<Incident>(`${this.baseUrl}/saveIncident`, incident)
+      .pipe(
+        catchError((error) => {
+          console.log('Error al obtener datos:', error.message);
+          return throwError(error);
+        })
+      );
+  }
+
   getSolutionTemplate(id: number): Observable<string>{
     console.log(id)
     return this.httpClient.get(`${this.baseUrl}/fetchSolutionTemplate/${id}`, { responseType: 'text' })
       .pipe(
         catchError((error) => {
-          // Manejar el error aquí
           console.error('Error al obtener datos:', error.message);
-          // Puedes lanzar el error nuevamente para que otros suscriptores lo manejen
           return throwError(error);
         })
       );
