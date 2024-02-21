@@ -68,7 +68,7 @@ export class NewPageComponent implements OnInit{
     solution: ['', Validators.required],
     confirmedOperability: ['', Validators.required],
     accessOc: ['', Validators.required]
-  })
+  });
 
   constructor( private fb: FormBuilder,
                private applicationService:ApplicationService, 
@@ -146,22 +146,7 @@ export class NewPageComponent implements OnInit{
     }
   }
 
-  getAnalysts(idSolutionManager: number):void{
-    const solutionManager = this.solutionManagers.find(app => app.id === idSolutionManager);
-    if (solutionManager) {
-      this.analysts = [];
-      solutionManager.groups.forEach( group => {
-        this.analysts.push(...group.analysts)
-      });
-    }
-  }
-
-  onSave(){
-    if(!this.myForm.valid){
-      this.myForm.markAllAsTouched();
-      return;
-    }
-
+  assingValues(){
     this.incident.id = this.myForm.value.id;
     this.incident.diagnosis = this.myForm.value.diagnosis;
     this.incident.date = new Date().toISOString();
@@ -181,7 +166,26 @@ export class NewPageComponent implements OnInit{
     this.incident.actionExecuted = this.actionExecuteds.find(action => action.id === this.myForm.value.actionExecutedId)!;
     this.incident.analyst = this.analysts.find(analyst => analyst.id === this.myForm.value.analyst)!;
     this.incident.stateRaizal = this.stateRaizals.find(state => state.id === this.myForm.value.stateRaizalId)!;
+  }
+
+  getAnalysts(idSolutionManager: number):void{
+    const solutionManager = this.solutionManagers.find(app => app.id === idSolutionManager);
+    if (solutionManager) {
+      this.analysts = [];
+      solutionManager.groups.forEach( group => {
+        this.analysts.push(...group.analysts)
+      });
+    }
+  }
+
+  onSave(){
+    if(!this.myForm.valid){
+      this.myForm.markAllAsTouched();
+      return;
+    }
     
+    this.assingValues();
+
     this.incidentService.saveIncident(this.incident).subscribe( incident => {
       this.incident = incident;
       //this.myForm.reset();
@@ -195,8 +199,8 @@ export class NewPageComponent implements OnInit{
           this.router.navigate(["/incidents/list"]);
         });
       })
+      
     });
-
   }
 
  }

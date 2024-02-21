@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, firstValueFrom, throwError } from 'rxjs';
 import { environments } from 'src/environments/environments';
 import { Incident } from '../interfaces/Incident.interface';
+import { DataItem } from '../interfaces/Report.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,6 @@ export class IncidentService {
   }
 
   getSolutionTemplate(id: number): Observable<string>{
-    console.log(id)
     return this.httpClient.get(`${this.baseUrl}/fetchSolutionTemplate/${id}`, { responseType: 'text' })
       .pipe(
         catchError((error) => {
@@ -45,6 +45,14 @@ export class IncidentService {
   private handleError(error: any) {
     console.error('An error ocurred', error);
     return throwError(() => error.message || error);
+  }
+
+  getAmountIncidentsPerDay(startDate:string, endDate:string): Observable<[ [string, number] ]>{
+    return this.httpClient.get<[ [string, number] ]>(`${this.baseUrl}/fetchAmountIncidentsPerDay?startDate=${startDate}&endDate=${endDate}`);
+  }
+
+  getAmountIncidentsPerApp(startDate:string, endDate:string): Observable<[ [string, number] ]>{
+    return this.httpClient.get<[ [string, number] ]>(`${this.baseUrl}/fetchAmountIncidentsPerApp?startDate=${startDate}&endDate=${endDate}`);
   }
 
 }
