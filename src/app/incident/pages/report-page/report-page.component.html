@@ -1,38 +1,45 @@
 <h1 style="margin: 20px 0px 0px 40px;">Reporte Incidentes</h1>
 
 
-<mat-card style="margin: 20px 40px 40px 40px;">
+<mat-card style="margin: 20px 40px 0px 40px;">
 
     <mat-card-content>
 
-        <form [formGroup]="myForm" (ngSubmit)="generateReport">
+        <form [formGroup]="myForm" (ngSubmit)="generateReport()">
 
             <div>
                 <mat-form-field>
-                    <mat-label>Enter a date range</mat-label>
+                    <mat-label>Ingrese rango de fechas</mat-label>
                     <mat-date-range-input [rangePicker]="picker">
                       <input matStartDate placeholder="Start date" formControlName="startDate">
                       <input matEndDate placeholder="End date" formControlName="endDate">
                     </mat-date-range-input>
-                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
                   </mat-form-field>
+
+                  <button mat-raised-button color="primary"
+                          [disabled]="myForm.invalid"
+                          type="submit"
+                          style="margin: 0px 0px 12px 20px;">
+                    <mat-icon>search</mat-icon> Buscar
+                  </button>
+
             </div>
 
         </form>
-
+        
+        <div class="grid" *ngIf="isValidReport">
+            <div class="col-12 md:col-6 text-center p-8">
+                <h1>Incidentes x Dia</h1>
+                <app-bar-graph [observable]="observableDays" #barGraphDay></app-bar-graph>
+            </div>
+            <div class="col-12 md:col-6 text-center p-8">
+                <h1>Incidentes x App</h1>
+                <app-bar-graph [observable]="observableApps" #barGraphApp></app-bar-graph>
+            </div>
+        </div>
     </mat-card-content>
-
+    
 </mat-card>
-
-<div class="grid">
-    <div class="col text-center p-8 ">
-        <h1>Incidentes x Dia</h1>
-        <app-bar-graph [observable]="observableDays"></app-bar-graph>
-    </div>
-    <div class="col text-center p-8">
-        <h1>Incidentes x App</h1>
-        <app-bar-graph [observable]="observableApps"></app-bar-graph>
-    </div>
-</div>
