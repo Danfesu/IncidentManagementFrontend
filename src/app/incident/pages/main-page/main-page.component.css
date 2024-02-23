@@ -1,3 +1,34 @@
 :host {
   display: block;
 }
+
+
+.animated-image {
+  opacity: 0; /* Comienza con opacidad 0 */
+  animation: moveUp 1s ease forwards; /* La animación terminará y se mantendrá en su último estado */
+}
+
+@keyframes moveUp {
+  0% {
+      transform: translateY(20px); /* Inicia 20px abajo */
+      opacity: 0; /* Opacidad inicial */
+  }
+  100% {
+      transform: translateY(-20px); /* Termina 20px arriba */
+      opacity: 1; /* Opacidad final */
+  }
+}
+
+.animated-text {
+  opacity: 0; /* Comienza con opacidad 0 */
+  animation: moveUp 0.5s ease forwards; /* La animación terminará y se mantendrá en su último estado */
+}
+
+.custom-mat-card {
+  border: 1px solid rgb(197, 197, 197); /* Define el grosor y el color del borde */
+}
+
+.text-bold{
+  color: #3F51B5;
+  font-weight: bold;
+}
