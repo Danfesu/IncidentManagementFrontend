@@ -52,6 +52,8 @@ export class ListPageComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   Incidents$!: Observable<Incident[]>;
+
+  isLoaded: boolean = false;
   
   constructor(private applicationService:ApplicationService,
               private actionExecutedService:ActionExecutedService,
@@ -75,6 +77,7 @@ export class ListPageComponent implements OnInit, AfterViewInit{
       }else{
         this.utilidadService.mostrarAlerta("No se encontraron datos","Oops!");
       }
+      this.isLoaded = true;
     })
   }
 

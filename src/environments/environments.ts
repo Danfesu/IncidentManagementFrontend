@@ -1,4 +1,4 @@
 
 export const environments = {
-    baseUrl: 'http://localhost:8080/IncidentManagement'
+    baseUrl: 'http://20.121.114.211:8080/IncidentManagement'
 }
